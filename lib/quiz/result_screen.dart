@@ -5,9 +5,10 @@ import 'package:quiz_demo/quiz/questions_summary.dart';
 import 'package:quiz_demo/quiz/quiz.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key, required this.chosenAnswer});
+  const ResultScreen({super.key, required this.chosenAnswer,required this.onRestart});
 
   final List<String> chosenAnswer;
+  final void Function() onRestart;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -59,10 +60,7 @@ class ResultScreen extends StatelessWidget {
                     Icons.refresh,
                   color: Colors.white,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const Quiz()));
-                },
+                onPressed: onRestart,
                 label: const Text(
                     'Restart Quiz!',
                   style: TextStyle(
