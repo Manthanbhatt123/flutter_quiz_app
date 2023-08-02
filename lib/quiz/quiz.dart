@@ -5,9 +5,8 @@ import 'package:quiz_demo/quiz/question_screen.dart';
 import 'package:quiz_demo/quiz/result_screen.dart';
 import 'package:quiz_demo/quiz/start_screen.dart';
 
-class Quiz extends StatefulWidget{
+class Quiz extends StatefulWidget {
   const Quiz({super.key});
-
 
   @override
   State<Quiz> createState() {
@@ -15,8 +14,8 @@ class Quiz extends StatefulWidget{
   }
 }
 
-class _QuizState extends State<Quiz>{
-  List<String> selectedAnswers =[];
+class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   var activeScreen = "start-screen";
 
   @override
@@ -24,39 +23,42 @@ class _QuizState extends State<Quiz>{
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
   }
-  void switchScreen(){
+
+  void _switchScreen() {
     setState(() {
       activeScreen = 'question-screen';
     });
   }
 
-  void restartQuiz(){
+  void _restartQuiz() {
     setState(() {
-      selectedAnswers=[];
-      activeScreen='question-screen';
+      selectedAnswers = [];
+      activeScreen = 'question-screen';
     });
   }
-  void chooseAnswer(String answer){
+
+  void _chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
-    if(selectedAnswers.length == question.length){
+    if (selectedAnswers.length == question.length) {
       setState(() {
         activeScreen = "result-screen";
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    Widget screenWidget = StartScreen(switchScreen);
+    Widget screenWidget = StartScreen(_switchScreen);
 
-    if(activeScreen == 'question-screen'){
-      screenWidget = QuestionScreen(onSelectedAnswer:chooseAnswer);
+    if (activeScreen == 'question-screen') {
+      screenWidget = QuestionScreen(onSelectedAnswer: _chooseAnswer);
     }
 
-    if(activeScreen == 'result-screen'){
+    if (activeScreen == 'result-screen') {
       screenWidget = ResultScreen(
-          chosenAnswer: selectedAnswers,
-        onRestart: restartQuiz,
+        chosenAnswer: selectedAnswers,
+        onRestart: _restartQuiz,
       );
     }
     return MaterialApp(
@@ -78,5 +80,4 @@ class _QuizState extends State<Quiz>{
       ),
     );
   }
-
 }

@@ -5,9 +5,10 @@ import 'package:quiz_demo/style/answers_button.dart';
 
 // ignore: must_be_immutable
 class QuestionScreen extends StatefulWidget {
-   QuestionScreen({super.key,required this.onSelectedAnswer});
+  QuestionScreen({super.key, required this.onSelectedAnswer});
 
   void Function(String answer) onSelectedAnswer;
+
   @override
   State<StatefulWidget> createState() {
     return _QuestionState();
@@ -15,12 +16,9 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionState extends State<QuestionScreen> {
-
-
-
   var currentQuestionIndex = 0;
 
-  onClickAnswer(String selectedAnswer){
+  _onClickAnswer(String selectedAnswer) {
     widget.onSelectedAnswer(selectedAnswer);
     setState(() {
       currentQuestionIndex++;
@@ -29,7 +27,6 @@ class _QuestionState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final currentQuestion = question[currentQuestionIndex];
 
     return SizedBox(
@@ -40,21 +37,19 @@ class _QuestionState extends State<QuestionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-                currentQuestion.text,
+            Text(currentQuestion.text,
                 style: GoogleFonts.lato(
-                  color: const Color.fromARGB(255, 177, 161, 243),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
-                textAlign:TextAlign.center),
+                    color: const Color.fromARGB(255, 177, 161, 243),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center),
             const SizedBox(height: 30),
-            ...currentQuestion.getShuffledAnswer().map((answer){
+            ...currentQuestion.shuffledAnswer.map((answer) {
               return AnswerButton(
                   answer: answer,
-                  onClick: (){
-                    onClickAnswer(answer);
-              });
+                  onClick: () {
+                    _onClickAnswer(answer);
+                  });
             }),
           ],
         ),
