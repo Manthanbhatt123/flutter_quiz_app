@@ -6,7 +6,6 @@ import 'package:quiz_demo/style/answers_button.dart';
 class QuestionScreen extends StatefulWidget {
    QuestionScreen({super.key,required this.onSelectedAnswer});
 
-
   void Function(String answer) onSelectedAnswer;
   @override
   State<StatefulWidget> createState() {
