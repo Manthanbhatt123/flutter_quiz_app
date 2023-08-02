@@ -13,12 +13,18 @@ class QuestionSummary extends StatelessWidget {
         child: Column(
           children: summaryData.map((data) {
             return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  ((data['question_index'] as int) + 1).toString(),
-                  style: const TextStyle(
-                    backgroundColor: Colors.pinkAccent,
-                  ) ,
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: (data['user_answer'].toString() ==
+                          data['correct_answer'].toString())
+                      ? const Color.fromARGB(255, 37, 136, 208)
+                      : const Color.fromARGB(255, 219, 99, 252),
+                  child: Text(
+                    ((data['question_index'] as int) + 1).toString(),
+                    style: const TextStyle(color: Colors.black),
+                  ),
                 ),
                 Expanded(
                   child: Container(
@@ -30,25 +36,27 @@ class QuestionSummary extends StatelessWidget {
                         Text(
                           data['question'] as String,
                           style: const TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 197, 183, 236)
-                          ),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 197, 183, 236)),
                         ),
-                        const SizedBox(height: 5,),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Text(
                           data['user_answer'] as String,
                           style: const TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 197, 153, 200)
-                          ),
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 224, 109, 232)),
                         ),
                         Text(
                           data['correct_answer'] as String,
                           style: const TextStyle(
-                            color: Color.fromARGB(255, 103, 69, 189)
-                          ),
+                              color: Color.fromARGB(255, 125, 154, 255)),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),

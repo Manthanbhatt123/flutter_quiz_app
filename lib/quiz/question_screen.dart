@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_demo/data/question.dart';
 import 'package:quiz_demo/style/answers_button.dart';
 
+// ignore: must_be_immutable
 class QuestionScreen extends StatefulWidget {
    QuestionScreen({super.key,required this.onSelectedAnswer});
 
